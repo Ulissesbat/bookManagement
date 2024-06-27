@@ -18,22 +18,22 @@ public class BookDto {
 	private String author;
 	
 	@Size(max = 13, message = "ISBN must contain 13 numbers" )
-	private String ISBN;
+	private String isbn;
 	
 	
-	public BookDto(Long id, String title, String author, String ISBN) {
+	public BookDto(Long id, String title, String author, String isbn) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.author = author;
-		this.ISBN = ISBN;
+		this.isbn = isbn;
 	}
 	
 	public BookDto(Book entity) {
 		id = entity.getId();
 		title = entity.getTitle();
 		author = entity.getAuthor();
-		ISBN = entity.getISBN();
+		isbn = entity.getIsnb();
 	}
 
 	public Long getId() {
@@ -48,8 +48,8 @@ public class BookDto {
 		return author;
 	}
 
-	public String getISBN() {
-		return ISBN;
+	public String getIsbn() {
+		return isbn;
 	}
 	
 	

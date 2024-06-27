@@ -17,17 +17,17 @@ public class Book {
 	private Long id;
 	private String title;
 	private String author;
-	private String ISBN;
+	private String isnb;
 
 	public Book() {
 	}
 
-	public Book(Long id, String title, String author, String iSBN) {
+	public Book(Long id, String title, String author, String isbn) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.author = author;
-		ISBN = iSBN;
+		this.isnb = isbn;
 	}
 
 	public Long getId() {
@@ -54,12 +54,12 @@ public class Book {
 		this.author = author;
 	}
 
-	public String getISBN() {
-		return ISBN;
+	public String getIsnb() {
+		return isnb;
 	}
 
-	public void setISBN(String iSBN) {
-		ISBN = iSBN;
+	public void setIsnb(String isnb) {
+		this.isnb = isnb;
 	}
 
 	@Override
