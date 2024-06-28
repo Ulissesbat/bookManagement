@@ -31,10 +31,22 @@ public class BookService {
 	@Transactional
 	public BookDto insert(BookDto dto) {//Criar novo livro
 		Book books = new Book();
-		books.setTitle(dto.getTitle());
-		books.setAuthor(dto.getAuthor());
-		books.setIsbn(dto.getIsbn());
+		books = dtoToEntity(books, dto);
 		books = repository.save(books);
 		return new BookDto(books);
+	}
+	@Transactional
+	public BookDto update(Long id, BookDto dto) {//Atualizar um livro
+		Book books = repository.getReferenceById(id);
+		books = dtoToEntity(books, dto);
+		books = repository.save(books);
+		return new BookDto(books);
+	}
+	
+	private static Book dtoToEntity(Book book, BookDto dto) {//tirar repetição de update e insert
+		book.setTitle(dto.getTitle());
+		book.setAuthor(dto.getAuthor());
+		book.setIsbn(dto.getIsbn());
+		return book;
 	}
 }
