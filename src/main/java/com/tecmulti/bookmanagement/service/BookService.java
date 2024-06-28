@@ -43,10 +43,16 @@ public class BookService {
 		return new BookDto(books);
 	}
 	
+	@Transactional
+	public void delete(Long id) {
+		repository.deleteById(id);
+	}
+	
 	private static Book dtoToEntity(Book book, BookDto dto) {//tirar repetição de update e insert
 		book.setTitle(dto.getTitle());
 		book.setAuthor(dto.getAuthor());
 		book.setIsbn(dto.getIsbn());
 		return book;
 	}
+	
 }
