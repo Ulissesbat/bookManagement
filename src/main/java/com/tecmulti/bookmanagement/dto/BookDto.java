@@ -33,7 +33,7 @@ public class BookDto {
 		id = entity.getId();
 		title = entity.getTitle();
 		author = entity.getAuthor();
-		isbn = entity.getIsnb();
+		isbn = entity.getIsbn();
 	}
 
 	public Long getId() {

@@ -17,15 +17,24 @@ public class BookService {
 	private BookRepository repository;
 
 	@Transactional(readOnly = true)
-	public Page<BookDto> findAll(Pageable pageable) {
+	public Page<BookDto> findAll(Pageable pageable) {//listagem de livros paginada
 		Page<Book> result = repository.findAll(pageable);
 		return result.map(x -> new BookDto(x));
 	}
 	
 	@Transactional(readOnly = true)
-	public BookDto findById(Long id) {
+	public BookDto findById(Long id) {//Busca especifica por Id
 		Book books = repository.findById(id).get();
 		return new BookDto(books);
 	}
 	
+	@Transactional
+	public BookDto insert(BookDto dto) {//Criar novo livro
+		Book books = new Book();
+		books.setTitle(dto.getTitle());
+		books.setAuthor(dto.getAuthor());
+		books.setIsbn(dto.getIsbn());
+		books = repository.save(books);
+		return new BookDto(books);
+	}
 }

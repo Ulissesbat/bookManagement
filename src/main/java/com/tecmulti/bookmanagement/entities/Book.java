@@ -17,7 +17,7 @@ public class Book {
 	private Long id;
 	private String title;
 	private String author;
-	private String isnb;
+	private String isbn;
 
 	public Book() {
 	}
@@ -27,7 +27,7 @@ public class Book {
 		this.id = id;
 		this.title = title;
 		this.author = author;
-		this.isnb = isbn;
+		this.isbn = isbn;
 	}
 
 	public Long getId() {
@@ -54,12 +54,12 @@ public class Book {
 		this.author = author;
 	}
 
-	public String getIsnb() {
-		return isnb;
+	public String getIsbn() {
+		return isbn;
 	}
 
-	public void setIsnb(String isnb) {
-		this.isnb = isnb;
+	public void setIsbn(String isbn) {
+		this.isbn = isbn;
 	}
 
 	@Override
