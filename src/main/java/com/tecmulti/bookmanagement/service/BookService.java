@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.tecmulti.bookmanagement.dto.BookDto;
 import com.tecmulti.bookmanagement.entities.Book;
 import com.tecmulti.bookmanagement.repositories.BookRepository;
+import com.tecmulti.bookmanagement.service.exeption.ResourceNotFountExeption;
 
 @Service
 public class BookService {
@@ -24,7 +25,8 @@ public class BookService {
 	
 	@Transactional(readOnly = true)
 	public BookDto findById(Long id) {//Busca especifica por Id
-		Book books = repository.findById(id).get();
+		Book books = repository.findById(id).orElseThrow(
+				()-> new ResourceNotFountExeption("Recurso não encontrado"));
 		return new BookDto(books);
 	}
 	
