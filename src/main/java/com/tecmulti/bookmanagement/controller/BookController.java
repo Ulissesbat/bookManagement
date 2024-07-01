@@ -19,6 +19,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.tecmulti.bookmanagement.dto.BookDto;
 import com.tecmulti.bookmanagement.service.BookService;
 
+import jakarta.validation.Valid;
+
 @Controller
 @RequestMapping(value = "/books")
 public class BookController {
@@ -38,14 +40,14 @@ public class BookController {
 		return ResponseEntity.ok(dto);
 	}
 	@PostMapping
-	public ResponseEntity<BookDto>insert(@RequestBody BookDto dto){
+	public ResponseEntity<BookDto>insert(@Valid @RequestBody BookDto dto){
 		dto = service.insert(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
 		return ResponseEntity.created(uri).body(dto);
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<BookDto>update(@PathVariable Long id,@RequestBody BookDto dto){
+	public ResponseEntity<BookDto>update(@PathVariable Long id,@Valid @RequestBody BookDto dto){
 		dto = service.update(id, dto);
 		return ResponseEntity.ok(dto);
 	}
