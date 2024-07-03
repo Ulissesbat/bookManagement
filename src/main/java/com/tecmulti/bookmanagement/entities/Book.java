@@ -18,16 +18,18 @@ public class Book {
 	private String title;
 	private String author;
 	private String isbn;
+	private Boolean disponivel;
 
 	public Book() {
 	}
 
-	public Book(Long id, String title, String author, String isbn) {
+	public Book(Long id, String title, String author, String isbn, Boolean disponivel) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.author = author;
 		this.isbn = isbn;
+		this.disponivel = disponivel;
 	}
 
 	public Long getId() {
@@ -60,6 +62,14 @@ public class Book {
 
 	public void setIsbn(String isbn) {
 		this.isbn = isbn;
+	}
+
+	public Boolean getDisponivel() {
+		return disponivel;
+	}
+
+	public void setDisponivel(Boolean disponivel) {
+		this.disponivel = disponivel;
 	}
 
 	@Override

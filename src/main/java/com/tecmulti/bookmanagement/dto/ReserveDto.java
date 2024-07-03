@@ -10,15 +10,15 @@ public class ReserveDto {
 	private Long id;
 	private LocalDate startDate;
 	private LocalDate endDate;
-	private String user;
+	private String userName;
 	private Book book;
 	
-	public ReserveDto(Long id, LocalDate startDate, LocalDate endDate, String user, Book book) {
+	public ReserveDto(Long id, LocalDate startDate, LocalDate endDate, String userName, Book book) {
 		super();
 		this.id = id;
 		this.startDate = startDate;
 		this.endDate = endDate;
-		this.user = user;
+		this.userName = userName;
 		this.book = book;
 	}
 	
@@ -27,7 +27,7 @@ public class ReserveDto {
 		id = entity.getId();
 		startDate = entity.getStartDate();
 		endDate = entity.getEndDate();
-		user = entity.getUser();
+		userName = entity.getUserName();
 		book = entity.getBook();
 	}
 
@@ -43,8 +43,8 @@ public class ReserveDto {
 		return endDate;
 	}
 
-	public String getUser() {
-		return user;
+	public String getUserName() {
+		return userName;
 	}
 
 	public Book getBook() {

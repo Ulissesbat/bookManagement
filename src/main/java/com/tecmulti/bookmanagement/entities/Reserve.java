@@ -3,20 +3,36 @@ package com.tecmulti.bookmanagement.entities;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "tb_reserve")
 public class Reserve {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private LocalDate startDate;
 	private LocalDate endDate;
-	private String user;
+	private String userName;
+	
+	@ManyToOne
+	 @JoinColumn(name = "book_id")
 	private Book book;
 	
-	public Reserve(Long id, LocalDate startDate, LocalDate endDate, String user, Book book) {
+	public Reserve(Long id, LocalDate startDate, LocalDate endDate, String userName, Book book) {
 		super();
 		this.id = id;
 		this.startDate = startDate;
 		this.endDate = endDate;
-		this.user = user;
+		this.userName = userName;
 		this.book = book;
 	}
 
@@ -44,12 +60,12 @@ public class Reserve {
 		this.endDate = endDate;
 	}
 
-	public String getUser() {
-		return user;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setUser(String user) {
-		this.user = user;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public Book getBook() {

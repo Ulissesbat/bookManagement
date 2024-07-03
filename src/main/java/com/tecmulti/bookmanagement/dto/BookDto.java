@@ -20,13 +20,15 @@ public class BookDto {
 	@Size(max = 13, message = "ISBN must contain 13 numbers" )
 	private String isbn;
 	
+	private Boolean disponivel;
 	
-	public BookDto(Long id, String title, String author, String isbn) {
+	public BookDto(Long id, String title, String author, String isbn, Boolean disponivel) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.author = author;
 		this.isbn = isbn;
+		this.disponivel = disponivel;
 	}
 	
 	public BookDto(Book entity) {
@@ -34,6 +36,7 @@ public class BookDto {
 		title = entity.getTitle();
 		author = entity.getAuthor();
 		isbn = entity.getIsbn();
+		disponivel = entity.getDisponivel();
 	}
 
 	public Long getId() {
@@ -51,6 +54,9 @@ public class BookDto {
 	public String getIsbn() {
 		return isbn;
 	}
-	
-	
+
+	public Boolean getDisponivel() {
+		return disponivel;
+	}
+
 }
