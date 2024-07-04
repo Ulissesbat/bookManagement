@@ -6,8 +6,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.tecmulti.bookmanagement.dto.BookDto;
 import com.tecmulti.bookmanagement.dto.ReserveDto;
 import com.tecmulti.bookmanagement.service.ReserveService;
 
@@ -21,6 +23,11 @@ public class ReserveController {
 	@GetMapping
 	public ResponseEntity<Page<ReserveDto>> findAll(Pageable pageable){
 		Page<ReserveDto> dto = service.findAll(pageable);
+		return ResponseEntity.ok(dto);
+	}
+	@GetMapping(value = "/{id}")
+	public ResponseEntity<ReserveDto> findById(@PathVariable Long id){
+		ReserveDto dto = service.findById(id);	
 		return ResponseEntity.ok(dto);
 	}
 	

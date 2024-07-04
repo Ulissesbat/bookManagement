@@ -2,15 +2,27 @@ package com.tecmulti.bookmanagement.dto;
 
 import java.time.LocalDate;
 
-import com.tecmulti.bookmanagement.entities.Book;
 import com.tecmulti.bookmanagement.entities.Reserve;
+
+import jakarta.validation.constraints.AssertTrue;
+import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
 
 public class ReserveDto {
 
 	private Long id;
+	
+	@NotNull(message = "A data de início é obrigatória.")
+    @PastOrPresent(message = "A data de início deve estar no passado ou presente.")
 	private LocalDate startDate;
+	
+	@NotNull(message = "A data de fim é obrigatória.")
+    @FutureOrPresent(message = "A data de início deve estar no passado ou presente.")
 	private LocalDate endDate;
+	
 	private String userName;
+	
 	private Long bookId;
 	
 	public ReserveDto(Long id, LocalDate startDate, LocalDate endDate, String userName, Long bookId) {
@@ -51,7 +63,12 @@ public class ReserveDto {
 		return bookId;
 	}
 
-	
-	
-	
+	@AssertTrue(message = "A data de fim deve ser posterior à data de início.")
+	public boolean isEndDateAfterStartDate() {
+	    if (startDate == null || endDate == null) {
+	        return true; // Se uma das datas for nula, a validação não falha aqui.
+	    }
+	    return endDate.isAfter(startDate);
+	}
+
 }

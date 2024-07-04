@@ -23,7 +23,7 @@ SELECT id, title FROM tb_book WHERE title IN ('Ulisses', 'As Aventuras de Huckle
 
 
 
-INSERT INTO tb_reserve (start_date, end_date, user_name, book_id) VALUES ('2024-07-01', '2024-07-15', 'user1', 17);
-INSERT INTO tb_reserve (start_date, end_date, user_name, book_id) VALUES ('2024-07-02', '2024-07-16', 'user2', 18);
-INSERT INTO tb_reserve (start_date, end_date, user_name, book_id) VALUES ('2024-07-03', '2024-07-17', 'user3', 19);
-INSERT INTO tb_reserve (start_date, end_date, user_name, book_id) VALUES ('2024-07-04', '2024-07-18', 'user4', 20);
+INSERT INTO tb_reserve (start_date, end_date, user_name, book_id) VALUES ('2024-07-01', '2024-07-15', 'Ulisses Santana', 17);
+INSERT INTO tb_reserve (start_date, end_date, user_name, book_id) VALUES ('2024-07-02', '2024-07-16', 'Lais Alves', 18);
+INSERT INTO tb_reserve (start_date, end_date, user_name, book_id) VALUES ('2024-07-03', '2024-07-17', 'Eloisa Viana', 19);
+INSERT INTO tb_reserve (start_date, end_date, user_name, book_id) VALUES ('2024-07-04', '2024-07-18', 'Beantriz Santana', 20);
