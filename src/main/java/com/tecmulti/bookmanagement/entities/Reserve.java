@@ -27,6 +27,9 @@ public class Reserve {
 	 @JoinColumn(name = "book_id")
 	private Book book;
 	
+	public Reserve() {
+	}
+	
 	public Reserve(Long id, LocalDate startDate, LocalDate endDate, String userName, Book book) {
 		super();
 		this.id = id;
