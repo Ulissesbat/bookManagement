@@ -32,6 +32,12 @@ public class BookService {
 				()-> new ResourceNotFountExeption("Recurso não encontrado"));
 		return new BookDto(books);
 	}
+	// método em BookService para retornar a entidade Book, para insert no ReserveService
+	 @Transactional(readOnly = true)
+	    public Book findEntityById(Long id) {
+	        return repository.findById(id).orElseThrow(
+	            () -> new ResourceNotFountExeption("Recurso não encontrado"));
+	    }
 	
 	@Transactional
 	public BookDto insert(BookDto dto) {//Criar novo livro
@@ -61,7 +67,7 @@ public class BookService {
 		}
 	}
 	
-	private static Book dtoToEntity(Book book, BookDto dto) {//tirar repetição de update e insert
+		static Book dtoToEntity(Book book, BookDto dto) {//tirar repetição de update e insert
 		book.setTitle(dto.getTitle());
 		book.setAuthor(dto.getAuthor());
 		book.setIsbn(dto.getIsbn());

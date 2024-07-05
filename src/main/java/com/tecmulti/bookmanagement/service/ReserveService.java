@@ -19,6 +19,9 @@ public class ReserveService {
 	@Autowired
 	private ReserveRepository repository;
 	
+	 @Autowired
+	 private BookService bookService;
+	
 	@Transactional(readOnly = true)
 	public Page<ReserveDto> findAll(Pageable pageable) {//listagem de reserva paginada
 		Page<Reserve> result = repository.findAll(pageable);
@@ -31,5 +34,29 @@ public class ReserveService {
 				()-> new ResourceNotFountExeption("Recurso não encontrado"));
 		return new ReserveDto(reserve);
 	}
+	@Transactional
+	public ReserveDto insert(ReserveDto dto) {//Criar novo livro
+		Reserve reserve = new Reserve();
+		reserve = dtoToEntity(reserve, dto);
+		reserve = repository.save(reserve);
+		return new ReserveDto(reserve);
+	}
+	
+	private Reserve dtoToEntity(Reserve reserve, ReserveDto dto) {
+        reserve.setId(dto.getId());
+        reserve.setStartDate(dto.getStartDate());
+        reserve.setEndDate(dto.getEndDate());
+        reserve.setUserName(dto.getUserName());
+
+         // Recuperar o livro pelo ID e associar à reserva
+        Book book = bookService.findEntityById(dto.getBookId());
+        reserve.setBook(book);
+     
+        if (book == null) { // Verificar se o livro foi encontrado
+            throw new ResourceNotFountExeption("Livro não encontrado com o ID: " + dto.getBookId());
+        }
+        reserve.setBook(book);
+        return reserve;
+    }
 
 }
