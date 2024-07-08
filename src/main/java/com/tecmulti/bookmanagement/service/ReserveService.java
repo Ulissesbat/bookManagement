@@ -1,15 +1,18 @@
 package com.tecmulti.bookmanagement.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tecmulti.bookmanagement.dto.ReserveDto;
 import com.tecmulti.bookmanagement.entities.Book;
 import com.tecmulti.bookmanagement.entities.Reserve;
 import com.tecmulti.bookmanagement.repositories.ReserveRepository;
+import com.tecmulti.bookmanagement.service.exeption.DataBaseExeption;
 import com.tecmulti.bookmanagement.service.exeption.ResourceNotFountExeption;
 
 @Service
@@ -48,6 +51,19 @@ public class ReserveService {
 		reserve = dtoToEntity(reserve, dto);
 		reserve = repository.save(reserve);
 		return new ReserveDto(reserve);
+	}
+	
+	@Transactional(propagation = Propagation.SUPPORTS)
+	public void delete(Long id) {
+		if(! repository.existsById(id)){
+			 throw new ResourceNotFountExeption("Recurso não encontrado");
+		}
+		try {
+			repository.deleteById(id);
+		}
+		catch (DataIntegrityViolationException e) {
+			throw new DataBaseExeption("falha de integridade");
+		}
 	}
 	
 	private Reserve dtoToEntity(Reserve reserve, ReserveDto dto) {
