@@ -6,7 +6,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tecmulti.bookmanagement.dto.BookDto;
 import com.tecmulti.bookmanagement.dto.ReserveDto;
 import com.tecmulti.bookmanagement.entities.Book;
 import com.tecmulti.bookmanagement.entities.Reserve;
@@ -42,8 +41,17 @@ public class ReserveService {
 		return new ReserveDto(reserve);
 	}
 	
+	@Transactional
+	public ReserveDto update(Long id, ReserveDto dto) {//Atualizar um livro
+		Reserve reserve = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFountExeption("Reserva não encontrada com o ID: " + id));
+		reserve = dtoToEntity(reserve, dto);
+		reserve = repository.save(reserve);
+		return new ReserveDto(reserve);
+	}
+	
 	private Reserve dtoToEntity(Reserve reserve, ReserveDto dto) {
-        reserve.setId(dto.getId());
+		
         reserve.setStartDate(dto.getStartDate());
         reserve.setEndDate(dto.getEndDate());
         reserve.setUserName(dto.getUserName());
